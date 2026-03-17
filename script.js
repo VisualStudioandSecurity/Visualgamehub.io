@@ -1,40 +1,32 @@
-// Selecionando os elementos das telas e botões
 const btnStart = document.getElementById('btn-start');
 const screenEntry = document.getElementById('screen-entry');
 const screenHub = document.getElementById('screen-hub');
 
-// Configuração do Áudio
-// DICA: Coloque um arquivo .mp3 na mesma pasta e mude o nome abaixo
+// Nome do teu ficheiro de áudio que deve estar na mesma pasta no GitHub
 const bgMusic = new Audio('audio_fundo.mp3'); 
 bgMusic.loop = true;
-bgMusic.volume = 0.5; // Volume em 50% para não começar estourado
 
-// Função principal de transição
 btnStart.addEventListener('click', () => {
-    
-    // Tenta tocar a música assim que o usuário clica
-    bgMusic.play().then(() => {
-        console.log("Áudio iniciado com sucesso!");
-    }).catch(error => {
-        console.log("Erro ao iniciar áudio. Verifique o caminho do arquivo:", error);
-    });
+    // 1. Toca a música (Desbloqueia o autoplay)
+    bgMusic.play().catch(e => console.log("Áudio pendente de ficheiro .mp3"));
 
-    // Animação de saída da primeira tela
+    // 2. Transição visual suave
     screenEntry.style.opacity = '0';
     
-    // Pequeno delay para a animação de fade-out terminar
     setTimeout(() => {
         screenEntry.classList.remove('active');
         screenHub.classList.add('active');
         
-        // Faz a segunda tela aparecer suavemente
-        screenHub.style.opacity = '0';
+        // Ativa o fade-in da segunda tela
         setTimeout(() => {
             screenHub.style.opacity = '1';
         }, 50);
-        
     }, 800);
 });
 
-// Lógica para os botões de "JOGAR" dos cards
-const playButtons = document
+// Mensagem de feedback ao clicar nos menus (opcional)
+document.querySelectorAll('.nav-links li').forEach(item => {
+    item.addEventListener('click', () => {
+        console.log("Navegando para: " + item.innerText);
+    });
+});
