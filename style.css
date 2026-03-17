@@ -1,17 +1,24 @@
+/* Importando fontes de alta tecnologia */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap');
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
 
 body {
-    background-color: #050505;
+    background-color: #050505 !important; /* Força o fundo preto absoluto */
     color: white;
     font-family: 'Rajdhani', sans-serif;
     height: 100vh;
+    width: 100vw;
     overflow: hidden;
 }
 
+/* Configuração das Telas */
 section {
-    display: none;
+    display: none; /* Esconde o conteúdo por padrão para não virar aquela lista branca */
     height: 100vh;
     width: 100%;
     flex-direction: column;
@@ -21,12 +28,23 @@ section {
     transition: opacity 0.8s ease;
 }
 
-section.active { display: flex; opacity: 1; }
+section.active { 
+    display: flex !important; 
+    opacity: 1; 
+}
 
-/* --- ESTILO LOGIN (TELA 1) --- */
-.main-container { display: flex; align-items: center; gap: 40px; }
+/* --- TELA DE LOGIN (ESTILO LANDBOX) --- */
+.main-container { 
+    display: flex; 
+    align-items: center; 
+    gap: 40px; 
+}
 
-.side-menu { display: flex; flex-direction: column; gap: 12px; }
+.side-menu { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+}
 
 .side-btn {
     width: 190px;
@@ -38,95 +56,8 @@ section.active { display: flex; opacity: 1; }
     font-family: 'Orbitron', sans-serif;
     font-size: 0.7rem;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    text-transform: uppercase;
 }
 
 .register { background: linear-gradient(to right, #a3654d, #7a4633); }
-.wax { background: linear-gradient(to right, #5e4ec7, #423696); }
-.telos { background: linear-gradient(to right, #4c3ba3, #362a75); }
-
-.login-box {
-    background: rgba(15, 15, 15, 0.98);
-    padding: 45px;
-    width: 390px;
-    border-radius: 10px;
-    border: 1px solid #222;
-    text-align: center;
-}
-
-.neon-logo-main { font-family: 'Orbitron', sans-serif; color: #39FF14; text-shadow: 0 0 10px #39FF14; }
-
-.login-title { margin: 25px 0; font-size: 2rem; letter-spacing: 4px; font-family: 'Orbitron'; }
-
-.input-group { text-align: left; margin-bottom: 20px; }
-
-.input-group label { display: block; font-size: 0.65rem; color: #777; margin-bottom: 6px; }
-
-.input-group input {
-    width: 100%;
-    background: #0f0f0f;
-    border: 1px solid #333;
-    padding: 14px;
-    color: white;
-    border-radius: 5px;
-}
-
-.login-btn {
-    width: 100%;
-    background: #39FF14;
-    color: black;
-    padding: 16px;
-    border: none;
-    font-weight: bold;
-    font-family: 'Orbitron';
-    cursor: pointer;
-    border-radius: 5px;
-    box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
-}
-
-/* --- ESTILO HUB (TELA 2) --- */
-.gameverse-nav {
-    position: absolute; top: 0; width: 100%;
-    display: flex; justify-content: space-between;
-    padding: 30px 6%; align-items: center;
-    background: rgba(0,0,0,0.5); backdrop-filter: blur(10px);
-}
-
-.nav-logo { font-family: 'Orbitron'; color: #39FF14; font-size: 1.4rem; }
-
-.nav-links { display: flex; list-style: none; gap: 30px; }
-
-.nav-links li { font-size: 0.8rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
-
-.nav-links li:hover { color: #39FF14; }
-
-.btn-play-highlight {
-    background: #d4008d;
-    color: white;
-    padding: 12px 28px;
-    border-radius: 12px;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 0 20px rgba(212, 0, 141, 0.4);
-}
-
-.hero-section { display: flex; align-items: center; justify-content: space-between; width: 88%; margin-top: 50px; }
-
-.hero-title { font-family: 'Orbitron'; font-size: 5.5rem; line-height: 0.85; margin: 25px 0; }
-
-.tagline { color: #39FF14; background: rgba(57, 255, 20, 0.1); padding: 6px 18px; border-radius: 20px; font-weight: bold; }
-
-.laptop-frame {
-    width: 550px; height: 320px;
-    background: #1a1a1a; border: 6px solid #333;
-    border-radius: 20px; display: flex; align-items: center; justify-content: center;
-}
-
-.screen-content { width: 92%; height: 85%; background: #000; border-radius: 5px; display: flex; align-items: center; justify-content: center; }
-
-.mini-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-
-.mini-card { width: 70px; height: 100px; background: #222; border-radius: 8px; }
-
-.mini-card.highlight { background: #39FF14; box-shadow: 0 0 20px #39FF14; }
+.wax
