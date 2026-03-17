@@ -40,3 +40,26 @@
             en.y += en.speed;
             if (player.x < en.x + en.w && player.x + player.w > en.x && player.y < en.y + en.h && player.y + player.h > en.y) {
                 gameActive = false; alert("GAME OVER!"); location.reload();
+            }
+            if (en.y > canvas.height) enemies.splice(i, 1);
+        });
+    }
+
+    function draw() {
+        ctx.fillStyle = "#0a0a0a"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = "#222"; ctx.setLineDash([20, 20]); ctx.lineDashOffset = -roadY;
+        for(let i=1; i<4; i++) { ctx.beginPath(); ctx.moveTo(i*100, 0); ctx.lineTo(i*100, canvas.height); ctx.stroke(); }
+        ctx.fillStyle = player.color; ctx.shadowBlur = 15; ctx.shadowColor = player.color;
+        ctx.fillRect(player.x, player.y, player.w, player.h);
+        enemies.forEach(en => { ctx.fillStyle = en.color; ctx.shadowColor = en.color; ctx.fillRect(en.x, en.y, en.w, en.h); });
+        ctx.shadowBlur = 0; requestAnimationFrame(() => { update(); draw(); });
+    }
+
+    window.addEventListener("keydown", e => {
+        if (e.key === "ArrowLeft" && player.targetX > 50) player.targetX -= 100;
+        if (e.key === "ArrowRight" && player.targetX < 250) player.targetX += 100;
+    });
+    draw();
+</script>
+</body>
+</html>
