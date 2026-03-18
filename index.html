@@ -10,137 +10,122 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body { 
-            background-color: #000; 
-            color: #fff; 
-            font-family: 'Orbitron', sans-serif;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
+            background-color: #000; color: #fff; font-family: 'Orbitron', sans-serif;
+            width: 100vw; height: 100vh; overflow: hidden; position: relative;
         }
 
-        /* ----- 1. NOVA TELA DE CARREGAMENTO (SPLASH) ----- */
+        /* 1. SPLASH SCREEN (HACKER INTRO) */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #000; color: #39FF14;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 10000; /* No topo de tudo */
-            font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;
-            transition: opacity 0.8s ease-out; /* Animação de sumir */
+            background: #000; color: #39FF14; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; z-index: 10000;
+            font-family: 'JetBrains Mono', monospace; transition: opacity 0.8s ease-out;
         }
 
-        /* ANIMAÇÃO DE TYPING NO SPLASH */
         @keyframes typing { from { width: 0; } to { width: 100%; } }
-        @keyframes blink { from { border-color: transparent; } to { border-color: #39FF14; } }
-        
-        .typewriter {
-            display: inline-block; overflow: hidden; white-space: nowrap;
-            border-right: 3px solid #39FF14; animation: typing 3s steps(40, end), blink .75s step-end infinite;
-        }
+        .typewriter { display: inline-block; overflow: hidden; white-space: nowrap; border-right: 3px solid #39FF14; animation: typing 2.5s steps(40, end); }
 
-        /* ----- ESTILOS GERAIS ----- */
-        .screen {
-            display: none; width: 100%; height: 100vh;
-            flex-direction: column; align-items: center; justify-content: center;
-            padding: 20px; text-align: center;
-            position: absolute; top: 0; left: 0;
-        }
+        /* 2. ESTRUTURA DE TELAS */
+        .screen { display: none; width: 100%; height: 100vh; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; position: absolute; }
 
-        .chroma { color: #39FF14; text-shadow: 0 0 10px #39FF14; margin-bottom: 20px; font-size: 1.2rem; }
+        .chroma { color: #39FF14; text-shadow: 0 0 10px #39FF14; margin-bottom: 20px; font-size: 1rem; letter-spacing: 2px; }
 
-        /* GRID ATUALIZADA (SUPORTA 5 EXEMPLOS) */
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
-            gap: 15px; width: 100%; max-width: 900px; margin-top: 20px; 
-        }
+        /* 3. GRID & CARDS */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; width: 100%; max-width: 1100px; margin-top: 20px; }
+        .card { background: #0a0a0a; border: 1px solid #1a1a1a; padding: 20px; border-radius: 10px; transition: 0.3s; }
+        .card:hover { border-color: #333; }
 
-        .card { background: #111; border: 1px solid #222; padding: 15px; border-radius: 8px; }
-
-        /* BOTÕES ATUALIZADOS */
-        .btn-main { 
-            width: 100%; max-width: 250px; padding: 15px; 
-            background: #fff; color: #000; border: none; 
-            font-weight: bold; cursor: pointer; margin-top: 10px; font-family: 'Orbitron';
-        }
-        .btn-main:hover { background: #39FF14; transform: scale(1.02); }
-
-        .btn-nav { 
-            background: none; border: 1px solid #444; color: #888; 
-            padding: 10px; cursor: pointer; width: 100%; margin-top: 5px; font-size: 0.7rem; font-family: 'Orbitron';
-        }
+        /* 4. BOTÕES */
+        .btn-main { width: 100%; max-width: 250px; padding: 15px; background: #fff; color: #000; border: none; font-weight: bold; cursor: pointer; font-family: 'Orbitron'; margin-top: 10px; }
+        .btn-main:hover { background: #39FF14; box-shadow: 0 0 15px #39FF14; }
+        .btn-nav { background: none; border: 1px solid #333; color: #888; padding: 10px; cursor: pointer; width: 100%; margin-top: 5px; font-size: 0.65rem; font-family: 'Orbitron'; transition: 0.3s; }
         .btn-nav:hover { border-color: #fff; color: #fff; }
 
-        input { 
-            width: 100%; max-width: 250px; padding: 12px; 
-            background: #111; border: 1px solid #333; color: #fff; 
-            text-align: center; margin-bottom: 10px; font-family: 'Orbitron';
-        }
+        input { width: 100%; max-width: 250px; padding: 12px; background: #111; border: 1px solid #333; color: #fff; text-align: center; margin-bottom: 10px; font-family: 'Orbitron'; outline: none; }
     </style>
 </head>
 <body onload="bootSystem()">
 
     <div id="splash-screen">
-        <p class="typewriter">> INITIATING_BOOT_PROTOCOL.EXE...</p>
-        <p style="margin-top: 10px;">DECRYPTING VANGUARD_HUB_1.0</p>
-        <p style="font-size: 0.7rem; color: #666; margin-top: 20px;">[ KOVALIOSKY_DESIGN_NET ]</p>
+        <p class="typewriter">> INITIALIZING_SECURE_VANGUARD_BOOT...</p>
+        <p style="font-size: 0.6rem; color: #666; margin-top: 10px;">AUTH: KOVALIOSKY_DEV // ENCRYPTION: AES-256</p>
     </div>
 
     <div id="login-screen" class="screen" style="display: flex;">
-        <h1 class="chroma">VISUAL STUDIO GAMES</h1>
+        <h1 class="chroma">SYSTEM ACCESS</h1>
         <input type="password" id="passInput" placeholder="PASSWORD">
-        <button type="button" class="btn-main" onclick="unlock()">ENTER SYSTEM</button>
+        <button type="button" class="btn-main" onclick="unlock()">DECRYPT & ENTER</button>
     </div>
 
     <div id="hub-screen" class="screen">
-        <h2 class="chroma" style="font-size: 0.8rem; letter-spacing: 2px;">VANGUARD_HUB</h2>
+        <h2 class="chroma">VANGUARD_CORE_HUB</h2>
+        
         <div class="grid">
-            <div class="card"><h3>SNAKE</h3><button class="btn-nav" onclick="window.location.href='snake.html'">LAUNCH</button></div>
-            <div class="card"><h3>DRIFT</h3><button class="btn-nav" onclick="window.location.href='carro.html'">LAUNCH</button></div>
+            <div class="card" style="border-color: #ff3131; background: rgba(255, 49, 49, 0.02);">
+                <h3 style="color:#ff3131; font-size:0.7rem;">SECURITY_SHIELD</h3>
+                <div id="security-status" style="font-family:'JetBrains Mono'; font-size:0.55rem; color:#ff3131; text-align:left; margin:10px 0; height:60px; line-height: 1.4;">
+                    > SYSTEM_IDLE<br>
+                    > NO_SCAN_HISTORY<br>
+                    > WAITING_COMMAND...
+                </div>
+                <button type="button" class="btn-nav" style="border-color:#ff3131; color:#ff3131;" onclick="runSecurityScan()">RUN_SECURE_SCAN</button>
+            </div>
+
+            <div class="card">
+                <h3>SOFTWARE</h3>
+                <button class="btn-nav" onclick="window.location.href='snake.html'">SNAKE_GAME</button>
+                <button class="btn-nav" onclick="window.location.href='carro.html'">DRIFT_SIM</button>
+            </div>
             
-            <div class="card" style="border: 1px solid #00d4ff; background: rgba(0, 212, 255, 0.05); grid-column: span 1;">
-                <h3 style="color:#00d4ff; font-size:0.8rem; margin-bottom: 5px;">SAMPLES_V2</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
-                    <button class="btn-nav" style="color:#39FF14; border-color:#39FF14; margin:0;" onclick="window.location.href='exemplo1.html'">DARK</button>
-                    <button class="btn-nav" style="color:#007bff; border-color:#007bff; margin:0;" onclick="window.location.href='exemplo2.html'">BUSINESS</button>
-                    <button class="btn-nav" style="color:#fff; border-color:#fff; margin:0;" onclick="window.location.href='exemplo3.html'">APPLE</button>
-                    <button class="btn-nav" style="color:#ff9900; border-color:#ff9900; margin:0;" onclick="window.location.href='exemplo4.html'">CRYPTO</button>
-                    <button class="btn-nav" style="color:#ff3131; border-color:#ff3131; margin:0; grid-column: span 2;" onclick="window.location.href='exemplo5.html'">AGENCY_3.0</button>
+            <div class="card" style="border-color: #00d4ff;">
+                <h3 style="color:#00d4ff; font-size:0.7rem;">WEB_INTERFACES</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 10px;">
+                    <button class="btn-nav" style="margin:0;" onclick="window.location.href='exemplo1.html'">NEON</button>
+                    <button class="btn-nav" style="margin:0;" onclick="window.location.href='exemplo2.html'">CLEAN</button>
+                    <button class="btn-nav" style="margin:0;" onclick="window.location.href='exemplo3.html'">APPLE</button>
+                    <button class="btn-nav" style="margin:0;" onclick="window.location.href='exemplo4.html'">CRYPTO</button>
+                    <button class="btn-nav" style="grid-column: span 2; border-color:#fff; color:#fff;" onclick="window.location.href='exemplo5.html'">AGENCY_3.0_PRO</button>
                 </div>
             </div>
 
             <div class="card" style="border: 1px solid; animation: chroma 3s infinite linear;">
-                <h3 style="font-size: 0.8rem;">CONTACT_DEV</h3>
-                <button class="btn-main" style="font-size:0.6rem; padding: 10px; max-width: 100%;" onclick="window.location.href='https://wa.me/5569992636349'">HIRE_NOW</button>
+                <h3 style="font-size: 0.7rem;">HIRE_ENGINEER</h3>
+                <button class="btn-main" style="font-size:0.55rem; padding: 10px;" onclick="window.location.href='https://wa.me/5569992636349'">WHATSAPP_DIRECT</button>
             </div>
         </div>
-        <button class="btn-nav" style="width: auto; margin-top: 20px;" onclick="location.reload()">LOGOUT</button>
+        
+        <button class="btn-nav" style="width: auto; margin-top: 20px; border:none;" onclick="location.reload()">[ SHUTDOWN_SESSION ]</button>
     </div>
 
     <script>
-        // Função do Splash Screen
         function bootSystem() {
-            console.log("Sistema Iniciado.");
-            // Aguarda 3.5 segundos e faz o splash sumir
             setTimeout(() => {
-                document.getElementById('splash-screen').style.opacity = '0';
-                // Remove o splash completamente após a animação
-                setTimeout(() => {
-                    document.getElementById('splash-screen').style.display = 'none';
-                }, 800);
-            }, 3500); 
+                const splash = document.getElementById('splash-screen');
+                splash.style.opacity = '0';
+                setTimeout(() => splash.style.display = 'none', 800);
+            }, 3000);
         }
 
         function unlock() {
-            // Esconde o Login e Mostra o Hub
-            document.getElementById('login-screen').style.setProperty('display', 'none', 'important');
-            document.getElementById('hub-screen').style.setProperty('display', 'flex', 'important');
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('hub-screen').style.display = 'flex';
         }
 
-        // Atalho tecla Enter no login
-        document.getElementById('passInput').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') unlock();
-        });
-    </script>
-</body>
-</html>
+        // LÓGICA DE SEGURANÇA (DEMONSTRAÇÃO DE PROGRAMAÇÃO)
+        function runSecurityScan() {
+            const statusDiv = document.getElementById('security-status');
+            const logs = [
+                "> INITIALIZING_SCAN...",
+                "> BYPASS_ATTEMPT_BLOCKED",
+                "> ENCRYPTING_XSS_SHIELD",
+                "> SQL_INJECTION_PROTECTED",
+                "> INTEGRITY_VERIFIED.",
+                "> RESULT: 100% SECURE"
+            ];
+            
+            let i = 0;
+            statusDiv.innerHTML = "";
+            statusDiv.style.color = "#39FF14"; // Muda para verde durante o scan
+            const interval = setInterval(() => {
+                if(i < logs.length) {
+                    statusDiv.innerHTML += logs[i] +
