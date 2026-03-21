@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visual Studio Games | Portfólio de Guilherme Silva</title>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4389870681468404"
-            crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4389870681468404" crossorigin="anonymous"></script>
 
     <style>
         body {
@@ -15,6 +14,7 @@
             color: white;
             text-align: center;
             padding: 50px 20px;
+            margin: 0;
         }
 
         .container {
@@ -30,7 +30,7 @@
         h1 { color: #58a6ff; margin-bottom: 10px; }
         p { color: #8b949e; font-size: 1.1em; line-height: 1.6; }
 
-        .btn-group { margin-top: 25px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+        .btn-group { margin: 25px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
 
         .btn {
             padding: 12px 24px;
@@ -39,6 +39,8 @@
             border-radius: 6px;
             font-weight: bold;
             transition: 0.3s;
+            cursor: pointer;
+            border: none;
         }
 
         .btn-github { background-color: #238636; }
@@ -76,9 +78,7 @@
                  data-ad-slot="5775198406"
                  data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
         <p>
@@ -87,8 +87,18 @@
         </p>
 
         <div class="btn-group">
-            <a href="https://github.com/VisualStudioandSecurity" class="btn btn-github">Ver Projetos no GitHub</a>
-            <a href="#" class="btn btn-pix" onclick="copyPix()">Apoiar com PIX</a>
+            <a href="https://github.com/VisualStudioandSecurity" class="btn btn-github" target="_blank">Ver Projetos no GitHub</a>
+            <button class="btn btn-pix" onclick="copyPix()">Apoiar com PIX</button>
+        </div>
+
+        <div class="ads-container">
+            <ins class="adsbygoogle"
+                 style="display:block; text-align:center;"
+                 data-ad-layout="in-article"
+                 data-ad-format="fluid"
+                 data-ad-client="ca-pub-4389870681468404"
+                 data-ad-slot="6154472350"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
         <div class="support-box">
@@ -98,9 +108,23 @@
 
     <script>
         function copyPix() {
-            const pixKey = "10267545266"; // Substitua pela sua chave real
-            navigator.clipboard.writeText(pixKey);
-            alert("Chave PIX copiada! Obrigado pelo apoio.");
+            const pixKey = "10267545266";
+            
+            // Método moderno de cópia
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(pixKey).then(() => {
+                    alert("Chave PIX copiada! Obrigado pelo apoio.");
+                });
+            } else {
+                // Fallback para navegadores sem HTTPS ou antigos
+                let textArea = document.createElement("textarea");
+                textArea.value = pixKey;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert("Chave PIX copiada! Obrigado pelo apoio.");
+            }
         }
     </script>
 
