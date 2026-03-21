@@ -14,7 +14,7 @@
             background-color: #0d1117;
             color: white;
             text-align: center;
-            padding: 50px;
+            padding: 50px 20px;
         }
 
         .container {
@@ -24,30 +24,42 @@
             padding: 30px;
             border-radius: 15px;
             border: 1px solid #30363d;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
 
-        h1 { color: #58a6ff; }
-        p { color: #8b949e; font-size: 1.1em; }
+        h1 { color: #58a6ff; margin-bottom: 10px; }
+        p { color: #8b949e; font-size: 1.1em; line-height: 1.6; }
+
+        .btn-group { margin-top: 25px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
 
         .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #238636;
+            padding: 12px 24px;
             color: white;
             text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
+            border-radius: 6px;
             font-weight: bold;
+            transition: 0.3s;
         }
 
-        .btn:hover { background-color: #2ea043; }
+        .btn-github { background-color: #238636; }
+        .btn-github:hover { background-color: #2ea043; }
 
-        .ads-placeholder {
-            margin: 20px 0;
+        .btn-pix { background-color: #32bcad; color: #0d1117; }
+        .btn-pix:hover { background-color: #45d6c6; }
+
+        .ads-container {
+            margin: 25px 0;
+            padding: 15px;
             background: #21262d;
-            padding: 10px;
+            border-radius: 8px;
             border: 1px dashed #484f58;
-            min-height: 100px; /* Garante espaço para o anúncio */
+            min-height: 100px;
+        }
+
+        .support-box {
+            margin-top: 30px;
+            padding: 15px;
+            border-top: 1px solid #30363d;
         }
     </style>
 </head>
@@ -57,7 +69,7 @@
         <h1>Visual Studio Games</h1>
         <p>Desenvolvimento de Softwares, Cyber Security e Estratégias de Trading.</p>
 
-        <div class="ads-placeholder">
+        <div class="ads-container">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-4389870681468404"
@@ -74,8 +86,23 @@
             Especialista em Python, GDevelop e automação de sistemas.
         </p>
 
-        <a href="https://github.com/VisualStudioandSecurity" class="btn">Ver Meus Projetos no GitHub</a>
+        <div class="btn-group">
+            <a href="https://github.com/VisualStudioandSecurity" class="btn btn-github">Ver Projetos no GitHub</a>
+            <a href="#" class="btn btn-pix" onclick="copyPix()">Apoiar com PIX</a>
+        </div>
+
+        <div class="support-box">
+            <p style="font-size: 0.9em;">Gosta do meu trabalho? Considere apoiar o desenvolvimento de novas ferramentas.</p>
+        </div>
     </div>
+
+    <script>
+        function copyPix() {
+            const pixKey = "SUA_CHAVE_PIX_AQUI"; // Substitua pela sua chave real
+            navigator.clipboard.writeText(pixKey);
+            alert("Chave PIX copiada! Obrigado pelo apoio.");
+        }
+    </script>
 
 </body>
 </html>
