@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visual Studio & Security | Hub de Inteligência Digital</title>
+    <title>Visual Studio & Security | Inteligência em Cibersegurança</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
@@ -27,89 +27,15 @@
         .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
         
         .featured-article { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 50px; }
-        .article-header-img { width: 100%; height: 300px; background-size: cover; background-position: center; }
+        .article-header-img { width: 100%; height: 320px; background-size: cover; background-position: center; }
         
         .article-body { padding: 40px; }
         .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; background: var(--accent-green); color: white; }
         .badge-apple { background: #555; }
 
-        h1.post-title { font-size: 2rem; color: var(--header); margin-top: 0; line-height: 1.2; }
+        h1.post-title { font-size: 2.2rem; color: var(--header); margin-top: 0; line-height: 1.2; }
         .meta { font-size: 0.85rem; color: #8b949e; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
         
         .post-content h3 { color: var(--accent-blue); margin-top: 30px; border-left: 4px solid var(--accent-blue); padding-left: 15px; }
         .post-content p { margin-bottom: 20px; text-align: justify; }
-        .post-content ul { padding-left: 20px; margin-bottom: 25px; }
-        .post-content li { margin-bottom: 10px; }
-        
-        .code-block { background: var(--code-bg); padding: 20px; border-radius: 8px; border: 1px solid var(--border); font-family: 'Consolas', monospace; color: #79c0ff; font-size: 0.9rem; overflow-x: auto; margin: 25px 0; }
-        .warning-box { background: rgba(241, 196, 15, 0.1); border: 1px solid #f1c40f; padding: 20px; border-radius: 8px; margin: 25px 0; }
-
-        footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); margin-top: 50px; }
-        .nav-links a { color: var(--accent-blue); text-decoration: none; margin: 0 10px; }
-    </style>
-</head>
-<body>
-
-<header>
-    <h1 class="logo">Visual Studio <span>& Security</span></h1>
-    <p>Hub de Inteligência em Cibersegurança e Mercado Financeiro</p>
-</header>
-
-<div class="container">
-    
-    <article class="featured-article">
-        <div class="article-header-img" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200');"></div>
-        <div class="article-body">
-            <span class="badge">Relatório Técnico</span>
-            <h1 class="post-title">Campanha FAUX#ELEVATE: O Ataque de 25 Segundos</h1>
-            <div class="meta">Publicado por Equipe Técnica Visual Studio & Security | 24 de Março, 2026</div>
-            
-            <div class="post-content">
-                <p>A campanha <strong>FAUX#ELEVATE</strong> utiliza currículos falsos como "bait" para iniciar uma cadeia de infecção extremamente rápida em ambientes corporativos. O malware utiliza scripts VBScript de 224 mil linhas para ocultar sua carga útil real e evitar detecção por sandboxes.</p>
-
-                <h3>Exfiltração e Mineração</h3>
-                <ul>
-                    <li><strong>Roubo de Dados:</strong> Utiliza o projeto <em>ChromElevator</em> para extrair credenciais de navegadores baseados em Chromium.</li>
-                    <li><strong>Criptomineração:</strong> Instala o minerador <em>mservice.exe</em> (XMRig) utilizando o driver de kernel <em>WinRing0x64.sys</em> para sequestrar o poder da CPU.</li>
-                    <li><strong>Destino:</strong> Os dados são enviados para contas russas como <em>olga.aitsaid@mail.ru</em> via SMTP.</li>
-                </ul>
-
-                <div class="code-block">
-                    # Script de Proteção Sugerido<br>
-                    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows Script Host\Settings" -Name "Enabled" -Value 0<br>
-                    Stop-Process -Name "mservice" -Force -ErrorAction SilentlyContinue
-                </div>
-            </div>
-        </div>
-    </article>
-
-    <article class="featured-article">
-        <div class="article-header-img" style="background-image: url('https://images.unsplash.com/photo-1611186871348-b1ec696e5237?q=80&w=1200');"></div>
-        <div class="article-body">
-            <span class="badge badge-apple">Atualização de Sistema</span>
-            <h1 class="post-title">Apple Lança Melhorias de Segurança em Segundo Plano para Corrigir Falha no WebKit</h1>
-            <div class="meta">Publicado por Equipe Técnica Visual Studio & Security | 24 de Março, 2026</div>
-            
-            <div class="post-content">
-                <p>A Apple iniciou a distribuição de uma nova categoria de atualizações chamada <strong>Melhorias de Segurança em Segundo Plano</strong>. Esta iniciativa visa reforçar a proteção dos sistemas iOS, iPadOS e macOS sem a necessidade de instalar versões completas de software.</p>
-
-                <h3>Correção do CVE-2026-20643</h3>
-                <p>A primeira leva dessas atualizações corrige uma vulnerabilidade crítica no <strong>WebKit</strong> (mecanismo do Safari). O problema envolvia uma brecha de origem cruzada na API de Navegação, que poderia permitir que sites maliciosos acessassem dados de outros domínios, violando o isolamento de segurança.</p>
-                
-                <p>A falha afetava as versões 26.3.1 do iOS e iPadOS, além do macOS 26.3.1 e 26.3.2. A correção foi implementada através de uma melhoria na validação de entrada, graças ao relato do pesquisador Thomas Espach.</p>
-
-                <h3>Gestão e Recomendações</h3>
-                <p>As Melhorias de Segurança em Segundo Plano podem ser gerenciadas no menu <strong>Privacidade e Segurança</strong> das configurações do dispositivo. A Apple recomenda manter a "Instalação Automática" ativada para garantir proteção imediata contra ameaças emergentes, como a recente falha zero-day (CVE-2026-20700) corrigida anteriormente.</p>
-            </div>
-        </div>
-    </article>
-
-</div>
-
-<footer>
-    <nav class="nav-links">
-        <a href="index.html">Início</a>
-        <a href="privacidade.html">Política de Privacidade</a>
-        <a href="sitemap.xml">Sitemap</a>
-    </nav>
-    <p style="font-size: 0.8rem; margin-top: 20px;">&copy; 2026 Visual Studio & Security. Todos os direitos reservados.</
+        .post-content ul {
