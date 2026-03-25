@@ -1,71 +1,36 @@
-/* finance-style.css */
-
-:root {
-    --bg-dark: #0a0a0c;
-    --accent-gold: #f3ba2f; /* Mantendo o tom para o texto do logo */
-}
-
-body {
-    background-color: var(--bg-dark);
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-}
-
-/* --- Container Principal do Cabeçalho --- */
-.finance-header {
-    position: relative; /* Essencial para o posicionamento do vídeo de fundo */
-    width: 100%;
-    height: 350px; /* Altura ideal para o topo do site */
-    overflow: hidden; /* Garante que o vídeo não saia da área */
+/* --- Header com o Olho Metálico --- */
+header {
+    position: relative;
+    height: 550px; /* Aumentado para melhor visualização no monitor 200Hz */
+    overflow: hidden;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    border-bottom: 2px solid var(--accent-gold);
-    z-index: 1; /* Garante que o conteúdo fique acima do fundo */
+    border-bottom: 3px solid var(--accent-blue);
+    background-color: #000;
 }
 
-/* --- O Vídeo/Animação de Fundo (O Olho) --- */
-.video-background {
+.header-video {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Centralização perfeita do olho */
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: -1; /* Coloca a animação atrás do texto */
-    object-fit: cover; /* Faz o vídeo cobrir a área sem distorcer */
-    opacity: 0.6; /* Leve transparência para não ofuscar o texto */
-    
-    /* Dica de Performance: A RTX 5060 vai processar isso sem esforço */
-    will-change: transform;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Garante que fique no fundo */
+    object-fit: cover; /* Faz o olho preencher o espaço sem distorcer */
+    opacity: 0.4; /* Opacidade reduzida para destacar o texto */
+    filter: brightness(0.6) contrast(1.2) saturate(0.8);
 }
 
-/* --- Conteúdo Sobreposto (Logo e Títulos) --- */
 .header-content {
-    background: rgba(10, 10, 12, 0.7); /* Fundo sutil para garantir legibilidade do texto */
-    padding: 20px 40px;
-    border-radius: 8px;
-    backdrop-filter: blur(5px); /* Efeito de desfoque sutil no fundo (opcional) */
-}
-
-.finance-header h1 {
-    font-size: 2.5rem;
-    color: white;
-    margin: 0;
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-.finance-header h1 span {
-    color: var(--accent-gold);
-}
-
-.finance-header p {
-    color: #a0a0a8;
-    font-size: 1.1rem;
-    margin: 10px 0 0;
+    position: relative;
+    z-index: 1; /* Fica acima do vídeo */
+    background: rgba(13, 17, 23, 0.7); /* Fundo semi-transparente */
+    backdrop-filter: blur(15px); /* Efeito Glassmorphism profissional */
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid rgba(88, 166, 255, 0.3); /* Borda sutil azul */
+    max-width: 850px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.7);
 }
