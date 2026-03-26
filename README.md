@@ -33,6 +33,8 @@ Este projeto utiliza camadas de proteção para garantir a integridade da propri
 2.  **Context Menu Lock**: Desativação de clique direito para proteção de ativos visuais.
 3.  **Bootstrapping Seguro**: Sistema de carregamento em "Splash" para evitar vazamento de dados durante o load.
 
+Links os levam direto pro sites feitos pela Visual Studio And Security - file:///C:/Users/Pichau/visual-studio-security/Portf%C3%B3liodeamostra/index.html
+
 ---
 
 ## 📧 Contato Comercial
