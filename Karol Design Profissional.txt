@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="pt-BR" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estética de Sobrancelhas</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+html, body { height: 100%; margin: 0; }
+* { box-sizing: border-box; }
+body { font-family: 'Poppins', sans-serif; background: #faf8f6; }
+
+.hero-bg {
+  background: linear-gradient(135deg, #8B4789 0%, #D4A5D4 100%);
+}
+
+.card-hover { transition: all 0.3s ease; }
+.card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(139, 71, 137, 0.15); }
+
+.fade-in { animation: fadeIn 0.8s ease forwards; opacity: 0; }
+@keyframes fadeIn { to { opacity: 1; } }
+
+.toast-enter { animation: toastIn 0.3s ease forwards; }
+@keyframes toastIn { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+@keyframes toastOut { from { opacity:1; } to { opacity:0; transform: translateY(20px); } }
+.toast-exit { animation: toastOut 0.3s ease forwards; }
+
+.service-card { background: #fff; border-radius: 12px; padding: 24px; text-align: center; cursor: pointer; border: 2px solid #f0f0f0; }
+.service-card:hover { border-color: #8B4789; }
+.service-icon { font-size: 48px; margin-bottom: 12px; }
+
+.booking-form { background: #fff; border-radius: 12px; padding: 32px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); max-width: 600px; margin: 0 auto; }
+
+input, textarea, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #e0e0e0; border-radius: 8px; font-family: 'Poppins', sans-serif; }
+input:focus, textarea:focus, select:focus { outline: none; border-color: #8B4789; box-shadow: 0 0 0 3px rgba(139, 71, 137, 0.1); }
+
+.btn-primary { background: #8B4789; color: #fff; border: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn-primary:hover { background: #7a3d76; transform: translateY(-2px); }
+.btn-primary:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+
+.overlay { position: fixed; inset:0; background: rgba(0,0,0,0.5); z-index: 100; display: flex; align-items: center; justify-content: center; }
+.modal { background: #fff; border-radius: 12px; max-width: 600px; width: 95%; max-height: 90%; overflow-y: auto; padding: 24px; position: relative; }
+
+.appointments-list { background: #fff; border-radius: 12px; padding: 20px; }
+.appointment-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-bottom: 1px solid #f0f0f0; }
+.appointment-item:last-child { border-bottom: none; }
+.appointment-badge { background: #8B4789; color: #fff; padding: 8px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+
+.tab-btn { padding: 12px 24px; border: none; background: #f5f5f5; cursor: pointer; font-weight: 500; transition: all 0.2s; border-radius: 8px; margin-right: 8px; }
+.tab-btn.active { background: #8B4789; color: #fff; }
+
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 24px 0; }
+.gallery-item { aspect-ratio: 1; background: linear-gradient(135deg, #D4A5D4 0%, #E8C8E8 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 64px; cursor: pointer; }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f5f5f5; }
+::-webkit-scrollbar-thumb { background: #8B4789; border-radius: 4px; }
+
+@media (max-width: 768px) {
+  .booking-form { padding: 20px; }
+  .hero-bg { padding: 20px !important; }
+}
+
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full">
+  <div id="app" class="w-full h-full overflow-auto">
+   <div id="toast-container" style="position:fixed; bottom:24px; right:24px; z-index:200; display:flex; flex-direction:column; gap:8px;"></div><!-- Navigation -->
+   <nav style="background:#fff; border-bottom: 1px solid #e8e8e8; position: sticky; top: 0; z-index: 50; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="flex items-center justify-between h-16">
+      <div class="flex items-center gap-3">
+       <span style="font-size: 24px;">💄</span> <span id="nav-salon-name" style="font-size: 18px; font-weight: 700; color: #8B4789;">Beauty Brows</span>
+      </div>
+      <div class="flex items-center gap-3"><button onclick="showTab('booking')" class="tab-btn" style="background: none; border: none; cursor: pointer;"><i data-lucide="calendar" style="width:20px;height:20px;"></i> <span class="ml-2 hidden sm:inline">Agendar</span></button> <button onclick="showTab('appointments')" class="tab-btn" style="background: none; border: none; cursor: pointer; position: relative;"><i data-lucide="clock" style="width:20px;height:20px;"></i> <span class="ml-2 hidden sm:inline">Agendamentos</span> <span id="appointment-badge" class="hidden absolute -top-1 -right-1 w-5 h-5 rounded-full text-xs flex items-center justify-center font-bold" style="background:#8B4789;color:#fff;"></span></button> <button onclick="showTab('gallery')" class="tab-btn" style="background: none; border: none; cursor: pointer;"><i data-lucide="image" style="width:20px;height:20px;"></i> <span class="ml-2 hidden sm:inline">Galeria</span></button>
+      </div>
+     </div>
+    </div>
+   </nav><!-- Hero Section -->
+   <section class="hero-bg w-full py-12 text-white text-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <h1 id="hero-title" style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; margin: 0; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">Seus olhos merecem destaque</h1>
+     <p id="hero-subtitle" style="font-size: 16px; margin: 12px 0 0 0; opacity: 0.95;">Design de sobrancelhas profissional</p>
+    </div>
+   </section><!-- Services Section -->
+   <section class="w-full py-12" style="background: #faf8f6;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <h2 style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: #333; text-align: center; margin: 0 0 32px 0;">Nossos Serviços</h2>
+     <div class="grid grid-cols-2 md:grid-cols-3 gap-6" id="services-grid"></div>
+    </div>
+   </section><!-- Tabs Content -->
+   <section class="w-full py-12" style="background: #fff;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><!-- Booking Tab -->
+     <div id="booking-tab" class="hidden">
+      <div class="booking-form">
+       <h2 style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #333; margin: 0 0 24px 0;">Agende seu atendimento</h2>
+       <form onsubmit="handleBooking(event)">
+        <div><label for="client-name" style="display: block; margin-bottom: 4px; color: #333; font-weight: 500;">Nome</label> <input type="text" id="client-name" placeholder="Seu nome completo" required>
+        </div>
+        <div><label for="client-phone" style="display: block; margin-bottom: 4px; color: #333; font-weight: 500;">Telefone</label> <input type="tel" id="client-phone" placeholder="(11) 99999-9999" required>
+        </div>
+        <div><label for="service-select" style="display: block; margin-bottom: 4px; color: #333; font-weight: 500;">Serviço</label> <select id="service-select" required style="width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #e0e0e0; border-radius: 8px;"></select>
+        </div>
+        <div><label for="booking-date" style="display: block; margin-bottom: 4px; color: #333; font-weight: 500;">Data</label> <input type="date" id="booking-date" required>
+        </div>
+        <div><label for="booking-time" style="display: block; margin-bottom: 4px; color: #333; font-weight: 500;">Horário</label> <input type="time" id="booking-time" required>
+        </div>
+        <div><label for="booking-notes" style="display: block; margin-bottom: 4px; color: #333; font-weight: 500;">Observações (opcional)</label> <textarea id="booking-notes" placeholder="Conte-nos mais sobre seus desejos..." style="min-height: 80px; resize: vertical;"></textarea>
+        </div><button type="submit" class="btn-primary w-full mt-4" style="width: 100%;">Confirmar Agendamento</button>
+       </form>
+      </div>
+     </div><!-- Appointments Tab -->
+     <div id="appointments-tab" class="hidden">
+      <div class="max-w-7xl">
+       <h2 style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #333; margin: 0 0 24px 0;">Meus Agendamentos</h2>
+       <div id="appointments-container" class="appointments-list"></div>
+      </div>
+     </div><!-- Gallery Tab -->
+     <div id="gallery-tab" class="hidden">
+      <div class="max-w-7xl">
+       <h2 style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #333; margin: 0 0 24px 0;">Galeria de Inspiração</h2>
+       <div class="gallery" id="gallery-container"></div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="w-full py-12" style="background: #3a2f3a; color: #fff;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="grid grid-cols-2 md:grid-cols-3 gap-8 mb-8">
+      <div>
+       <h4 style="font-weight: 600; font-size: 13px; margin-bottom: 12px; text-transform: uppercase; color: #D4A5D4;">SOBRE</h4>
+       <ul style="list-style: none; padding: 0; margin: 0;">
+        <li style="margin-bottom: 6px;"><a href="#" onclick="return false;" style="color: #ccc; text-decoration: none; font-size: 13px;">Sobre nós</a></li>
+        <li style="margin-bottom: 6px;"><a href="#" onclick="return false;" style="color: #ccc; text-decoration: none; font-size: 13px;">Nossa história</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 style="font-weight: 600; font-size: 13px; margin-bottom: 12px; text-transform: uppercase; color: #D4A5D4;">ATENDIMENTO</h4>
+       <ul style="list-style: none; padding: 0; margin: 0;">
+        <li style="margin-bottom: 6px;"><a href="#" onclick="return false;" style="color: #ccc; text-decoration: none; font-size: 13px;">Contato</a></li>
+        <li style="margin-bottom: 6px;"><a href="#" onclick="return false;" style="color: #ccc; text-decoration: none; font-size: 13px;">FAQ</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 style="font-weight: 600; font-size: 13px; margin-bottom: 12px; text-transform: uppercase; color: #D4A5D4;">CONTATO</h4>
+       <div style="font-size: 13px; line-height: 1.8;">
+        <p style="margin: 0; cursor: pointer;" onclick="showToast('📞 (11) 98765-4321')">📞 (11) 98765-4321</p>
+        <p style="margin: 4px 0 0 0; cursor: pointer;" onclick="showToast('📍 Rua da Beleza, 123')">📍 Rua da Beleza, 123</p>
+       </div>
+      </div>
+     </div>
+     <div style="border-top: 1px solid rgba(212, 165, 212, 0.3); padding-top: 16px;">
+      <p id="footer-text" style="color: #999; font-size: 12px; text-align: center; margin: 0;">© 2024 Beauty Brows. Todos os direitos reservados.</p>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+// Services
+const services = [
+  { id: 'design', name: 'Design de Sobrancelhas', emoji: '✨', price: 85 },
+  { id: 'fio', name: 'Design com Fio a Fio', emoji: '🎨', price: 120 },
+  { id: 'henna', name: 'Henna na Sobrancelha', emoji: '🌿', price: 65 },
+  { id: 'lamina', name: 'Sobrancelha com Lâmina', emoji: '✂️', price: 75 },
+  { id: 'tint', name: 'Tintura de Sobrancelha', emoji: '🖌️', price: 45 },
+  { id: 'limpeza', name: 'Limpeza Profunda', emoji: '💧', price: 35 }
+];
+
+// Gallery items (reference content)
+const galleryItems = [
+  { emoji: '💁' }, { emoji: '👩' }, { emoji: '✨' },
+  { emoji: '🌟' }, { emoji: '💫' }, { emoji: '👑' }
+];
+
+let appointments = [];
+let currentTab = 'booking';
+
+// Toast
+function showToast(msg) {
+  const c = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = 'toast-enter flex items-center gap-2 px-5 py-3 rounded-lg shadow-lg text-sm font-medium';
+  t.style.cssText = 'background:#8B4789;color:#fff;';
+  t.innerHTML = `<span>${msg}</span>`;
+  c.appendChild(t);
+  setTimeout(() => { t.classList.replace('toast-enter','toast-exit'); setTimeout(() => t.remove(), 300); }, 2500);
+}
+
+// Data SDK Handler
+const dataHandler = {
+  onDataChanged(data) {
+    appointments = data;
+    updateAppointmentBadge();
+    renderAppointments();
+  }
+};
+
+// Initialize Data SDK
+(async () => {
+  const result = await window.dataSdk.init(dataHandler);
+  if (!result.isOk) {
+    console.error('Data SDK init failed');
+  }
+})();
+
+// Services
+function renderServices() {
+  const g = document.getElementById('services-grid');
+  g.innerHTML = services.map(s => `
+    <div class="service-card card-hover">
+     <div class="service-icon">${s.emoji}</div>
+     <h3 style="margin: 0 0 8px 0; font-weight: 600; color: #333; font-size: 15px;">${s.name}</h3>
+     <p style="margin: 0 0 12px 0; color: #999; font-size: 13px;">R$ ${s.price}</p>
+    </div>
+  `).join('');
+}
+
+// Booking form
+function renderBookingForm() {
+  const select = document.getElementById('service-select');
+  select.innerHTML = '<option value="">Selecione um serviço</option>' + services.map(s => `<option value="${s.id}">${s.name} - R$ ${s.price}</option>`).join('');
+  
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('booking-date').setAttribute('min', today);
+}
+
+async function handleBooking(e) {
+  e.preventDefault();
+  
+  const name = document.getElementById('client-name').value;
+  const phone = document.getElementById('client-phone').value;
+  const serviceId = document.getElementById('service-select').value;
+  const date = document.getElementById('booking-date').value;
+  const time = document.getElementById('booking-time').value;
+  const notes = document.getElementById('booking-notes').value;
+  
+  const service = services.find(s => s.id === serviceId);
+  
+  const button = e.target.querySelector('button[type="submit"]');
+  button.disabled = true;
+  button.textContent = 'Processando...';
+  
+  const result = await window.dataSdk.create({
+    client_name: name,
+    phone: phone,
+    service: service.name,
+    date: date,
+    time: time,
+    notes: notes
+  });
+  
+  button.disabled = false;
+  button.textContent = 'Confirmar Agendamento';
+  
+  if (result.isOk) {
+    e.target.reset();
+    showToast('✓ Agendamento confirmado!');
+    showTab('appointments');
+  } else {
+    showToast('Erro ao confirmar agendamento');
+  }
+}
+
+// Appointments
+function renderAppointments() {
+  const c = document.getElementById('appointments-container');
+  if (appointments.length === 0) {
+    c.innerHTML = '<p style="color: #999; text-align: center; padding: 32px;">Nenhum agendamento ainda</p>';
+    return;
+  }
+  
+  c.innerHTML = appointments.map((a, idx) => `
+    <div class="appointment-item card-hover">
+     <div style="flex: 1;">
+      <p style="margin: 0 0 4px 0; font-weight: 600; color: #333;">${a.client_name}</p>
+      <p style="margin: 0 0 2px 0; color: #8B4789; font-weight: 500; font-size: 13px;">${a.service}</p>
+      <p style="margin: 0; color: #999; font-size: 12px;">${new Date(a.date).toLocaleDateString('pt-BR')} às ${a.time}</p>
+      ${a.notes ? `<p style="margin: 4px 0 0 0; color: #666; font-size: 12px;">📝 ${a.notes}</p>` : ''}
+     </div>
+     <button onclick="deleteAppointment(${idx})" style="background: none; border: none; cursor: pointer; color: #999;">
+      <i data-lucide="trash-2" style="width:18px;height:18px;"></i>
+     </button>
+    </div>
+  `).join('');
+  lucide.createIcons({nameAttr:'data-lucide'});
+}
+
+async function deleteAppointment(idx) {
+  const record = appointments[idx];
+  const button = event.target.closest('button');
+  button.disabled = true;
+  
+  const result = await window.dataSdk.delete(record);
+  if (!result.isOk) {
+    showToast('Erro ao deletar');
+    button.disabled = false;
+  } else {
+    showToast('✓ Agendamento removido');
+  }
+}
+
+function updateAppointmentBadge() {
+  const badge = document.getElementById('appointment-badge');
+  if (appointments.length > 0) {
+    badge.classList.remove('hidden');
+    badge.textContent = appointments.length;
+  } else {
+    badge.classList.add('hidden');
+  }
+}
+
+// Gallery
+function renderGallery() {
+  const g = document.getElementById('gallery-container');
+  g.innerHTML = galleryItems.map(item => `<div class="gallery-item">${item.emoji}</div>`).join('');
+}
+
+// Tabs
+function showTab(tab) {
+  document.querySelectorAll('[id$="-tab"]').forEach(el => el.classList.add('hidden'));
+  document.getElementById(tab + '-tab').classList.remove('hidden');
+  currentTab = tab;
+}
+
+// Config
+const defaultConfig = {
+  salon_name: 'Beauty Brows',
+  hero_title: 'Seus olhos merecem destaque',
+  hero_subtitle: 'Design de sobrancelhas profissional',
+  footer_text: '© 2024 Beauty Brows. Todos os direitos reservados.'
+};
+
+function applyConfig(config) {
+  const c = { ...defaultConfig, ...config };
+  document.getElementById('nav-salon-name').textContent = c.salon_name;
+  document.getElementById('hero-title').textContent = c.hero_title;
+  document.getElementById('hero-subtitle').textContent = c.hero_subtitle;
+  document.getElementById('footer-text').textContent = c.footer_text;
+}
+
+// Element SDK
+window.elementSdk.init({
+  defaultConfig,
+  onConfigChange: async (config) => { applyConfig(config); },
+  mapToCapabilities: (config) => ({
+    recolorables: [],
+    borderables: [],
+    fontEditable: undefined,
+    fontSizeable: undefined
+  }),
+  mapToEditPanelValues: (config) => new Map([
+    ['salon_name', config.salon_name || defaultConfig.salon_name],
+    ['hero_title', config.hero_title || defaultConfig.hero_title],
+    ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
+    ['footer_text', config.footer_text || defaultConfig.footer_text],
+  ])
+});
+
+// Init
+renderServices();
+renderBookingForm();
+renderGallery();
+showTab('booking');
+lucide.createIcons();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e20bf40c5a802f0',t:'MTc3NDQ3MTM5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

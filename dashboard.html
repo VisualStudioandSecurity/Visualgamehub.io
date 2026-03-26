@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Kovaliosky DeV | Command Center</title>
+    <style>
+        body { background: #050505; color: #00ff41; font-family: 'Courier New', monospace; margin: 0; overflow: hidden; }
+        .container { display: grid; grid-template-columns: 1fr 350px; height: 100vh; }
+        
+        /* Área do Gráfico */
+        .chart-section { border-right: 1px solid #00ff41; position: relative; }
+        
+        /* Sidebar de Inteligência */
+        .sidebar { padding: 15px; background: rgba(0, 20, 0, 0.9); overflow-y: auto; }
+        h2 { font-size: 1.2em; text-transform: uppercase; border-bottom: 1px solid #00ff41; padding-bottom: 5px; text-shadow: 0 0 10px #00ff41; }
+        
+        .news-card { border: 1px solid #003300; padding: 10px; margin-bottom: 15px; font-size: 0.85em; transition: 0.3s; }
+        .news-card:hover { border-color: #00ff41; background: rgba(0, 255, 65, 0.05); }
+        .news-card b { color: #fff; display: block; margin-bottom: 5px; }
+        
+        .status-bar { position: absolute; bottom: 0; width: 100%; background: #00ff41; color: #000; font-weight: bold; padding: 2px 10px; font-size: 0.7em; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <section class="chart-section">
+        <div id="tradingview_chart" style="height: 100%;"></div>
+        <div class="status-bar">SYSTEM STATUS: OPERATIONAL | FREQUENCY: 30M | TARGET: BTC/USDT</div>
+    </section>
+
+    <aside class="sidebar">
+        <h2>Security Feed</h2>
+        <div id="news-content">Iniciando varredura de dados...</div>
+    </aside>
+</div>
+
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script>
+    // Configuração do Gráfico de 30 Minutos
+    new TradingView.widget({
+        "autosize": true,
+        "symbol": "BINANCE:BTCUSDT",
+        "interval": "30",
+        "timezone": "America/Sao_Paulo",
+        "theme": "dark",
+        "style": "1",
+        "locale": "br",
+        "toolbar_bg": "#050505",
+        "enable_publishing": false,
+        "hide_top_toolbar": false,
+        "save_image": false,
+        "container_id": "tradingview_chart"
+    });
+
+    // Consumo da sua API Node.js (Backend que acabamos de subir)
+    async function updateIntelligence() {
+        try {
+            const response = await fetch('http://127.0.0.1:3000/news');
+            const data = await response.json();
+            const container = document.getElementById('news-content');
+            
+            if (data.articles && data.articles.length > 0) {
+                container.innerHTML = data.articles.slice(0, 8).map(art => `
+                    <div class="news-card">
+                        <b>> ${art.title}</b>
+                        <span>${new Date(art.publishedAt).toLocaleTimeString()}</span>
+                    </div>
+                `).join('');
+            }
+        } catch (err) {
+            document.getElementById('news-content').innerHTML = "ERRO: FALHA NA CONEXÃO COM O PROXY LOCAL.";
+        }
+    }
+
+    updateIntelligence();
+    setInterval(updateIntelligence, 60000); // Atualiza notícias a cada 1 min
+</script>
+
+</body>
+</html>
