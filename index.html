@@ -346,8 +346,7 @@
         }
       }
     }
-
-    function closeAutomationModal() {
+   function closeAutomationModal() {
       document.getElementById('automation-modal').classList.add('hidden');
         <article class="glass-card p-8 rounded-2xl">
           <span class="text-xs text-cyan-400 font-mono mb-2 block uppercase tracking-widest">Segurança Defensiva</span>
@@ -385,8 +384,7 @@ Exposição de ID de Sessão: Cookies sem a flag HttpOnly que podem ser roubados
 Parâmetros Manipuláveis: Campos de preço ou ID de usuário que, se alterados, permitem acesso a dados de terceiros.
 
 Vazamento de Informação: Cabeçalhos X-Powered-By que revelam a versão exata do seu servidor, facilitando a busca por exploits conhecidos.
-
-      </div>
+   </div>
     </div>
   </section>
 
@@ -401,7 +399,6 @@ Vazamento de Informação: Cabeçalhos X-Powered-By que revelam a versão exata 
       </div>
     </div>
   </section>
-
   <section class="py-24" id="projects">
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="section-title italic">Vanguards Visual <span class="text-gray-500 font-light">Lab</span></h2>
@@ -412,15 +409,13 @@ Vazamento de Informação: Cabeçalhos X-Powered-By que revelam a versão exata 
           <div class="flex gap-2">
             <span class="skill-tag">Python</span>
     }
-
-    // Fechar modal ao clicar fora
+   // Fechar modal ao clicar fora
     document.getElementById('automation-modal')?.addEventListener('click', function(e) {
       if (e.target === this) {
         closeAutomationModal();
       }
     });
-
-    // Pre-load TradingView script on page load
+  // Pre-load TradingView script on page load
     loadTradingViewScript();
   </script>
   <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e2c8aef7754535f',t:'MTc3NDU5NTA4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
